@@ -1,23 +1,11 @@
 <% include partials/header %>
 
-<h1><%= title %></h1>
-
-<form method="post" action="/users/add">
-	<label>Name</label>
-	<input type="text" name="name"><br>
-	<label>Email</label>
-	<input type="text" name="email"><br><br>
-	<input type="submit" name="submit" value="submit"><br>
-</form>
-
-<ul>
-
-	<% users.forEach(function(user) { %>
-		<li>
-			<%= user.name %> (<%= user.email %>)
-		</li>
-	<% }); %>
-
-</ul>
+<% characters.forEach(function(character) { %>
+<article class="thumb">
+	<a href="images/fulls/<%= character.recordKey %>.jpg" class="image"><img src="images/thumbs/<%= character.recordKey %>.jpg" alt="" /></a>
+	<h2><%= character.name %></h2>
+	<p><%= character.bio %></p>
+</article>
+<% }); %>
 
 <% include partials/footer %>

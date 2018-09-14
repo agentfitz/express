@@ -2,8 +2,18 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-
+var shuffle = require('shuffle-array');
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+	host: 'localhost',
+	user: 'root',
+	password: 'bf2321',
+	database: 'mcu'
+});
 var app = express();
+
+
+connection.connect();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -16,41 +26,35 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-var users = [
-	{
-		id: 1,
-		name: 'Frankie',
-		email: 'frankie@gmail.com'
-	},
-	{
-		id: 2,
-		name: 'Ellen',
-		email: 'ellen@gmail.com'
-	},
-	{
-		id: 3,
-		name: 'Jonas',
-		email: 'jonas@gmail.com'
-	}
-];
-
 app.get('/', function(request, response) {
-	
-	response.render('index', {
-		title: 'Customers',
-		users: users
+
+	connection.query('select * from characters', function(error, results, fields) {
+
+		if (error) throw error;
+
+		shuffle(results);
+
+		response.render('index', {
+			title: 'MCU Characters',
+			characters: results
+		});
+
 	});
 
 });
 
-app.post('/users/add', function(request, response) {
-	
-	var newUser = {
-		name: request.body.name,
-		email: request.body.email
-	};
+app.get('/movies', function(request, response) {
 
-	console.log(newUser);
+	connection.query('select * from movies', function(error, results, fields) {
+
+		if (error) throw error;
+
+		response.render('movies', {
+			title: 'MCU Movies',
+			movies: results
+		});
+
+	});
 
 });
 

@@ -1,0 +1,15 @@
+<% include partials/header %>
+
+<h1 class="movies__hdr"><%= title %></h1>
+
+<div class="movies">
+
+	<% movies.forEach(function(movie) { %>
+	<article class="movie">
+		<h2 class="movie__hdr"><%= movie.name %></h2>
+	</article>
+	<% }); %>
+
+</div>
+
+<% include partials/footer %>
