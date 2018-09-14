@@ -1329,7 +1329,7 @@ input, select, textarea {
 			}
 
 			.poptrox-popup .caption {
-				display: none !important;
+				/* display: none !important; */
 			}
 
 			.poptrox-popup .closer,
@@ -2029,14 +2029,26 @@ input, select, textarea {
 			color: inherit;
 		}
 
-
 .movies {
-	margin: 100px 40px 40px 40px;
+	margin: 25px;
 }
 
 .movies__hdr {
-	padding: 25px;
+	padding: 25px 25px 0;
 }
+
+@media screen and (min-width: 980px) {
+
+	.movies {
+		margin: 100px 40px 40px 40px;
+	}
+	
+	.movies__hdr {
+		padding: 25px;
+	}
+
+}
+
 
 .movie__hdr {
 	display: block;
