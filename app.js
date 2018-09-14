@@ -5,6 +5,7 @@ var path = require('path');
 var shuffle = require('shuffle-array');
 var mysql = require('mysql');
 
+var app = express();
 
 app.get('/', function(request, response) {
 
